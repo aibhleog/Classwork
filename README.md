@@ -1,2 +1,2 @@
 # Classwork
-Private repository to share classwork with professors.
+Repository to share classwork with professors.

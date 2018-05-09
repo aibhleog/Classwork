@@ -8,7 +8,7 @@ These are all of the scripts and resulting figures created and used in my final 
 + **lens-bkgd-2rax.py** -- similar to the previous script, this lenses the source plane and shows the source plane and image plane side-by-side, but with two image planes (one with axis ratio of 1.; the other, 2.).
 + **lens_gif.py** -- animation of a lensing event where the SIE point-like lens is moving across the field of view.
 
-## Contents -- Figures & GIFs
+#### Contents -- Figures & GIFs
 + **lens-still##** -- these are the output from the `lens-bkgd.py` script.
 + **lens2-still##** -- these are the output from the `lens-bkgd-2rax.py` script.
 + **source##** -- these are the output from the `lens_gif.py` script.

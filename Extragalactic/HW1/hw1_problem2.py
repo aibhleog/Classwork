@@ -34,7 +34,7 @@ models = []
 
 own = False
 for x in range(len(modelnames)):
-    #t = fits.open('/home/aibhleog/Desktop/catalogs/ck04models/ckp00/ckp00_%s.fits'\
+    #t = fits.open('/home/aibhleog/path/to/personal/ck04models/ckp00/ckp00_%s.fits'\
     t = fits.open('/home/aibhleog/Documents/Classes/Extragalactic/hw1_files/kp00/kp00_%s.fits'\
                   %(modelnames[x][:-5]))
     t2 = t[1].data
@@ -51,25 +51,8 @@ bfilt = [filts[:,2],filts[:,3]]
 vfilt = [filts[:,4],filts[:,5]]
 
 # -- calculating colors for BB -- #
-temp = [3000,6000,10000,15000]
-alltemp = [25,15,10,8,6,5,4,3]
+alltemp = [25,15,10,8,6,5,4,3] # in 10^3 K
 lam = np.arange(1e-9,4e-6,1e-9) # in m
-
-mags = [[],[],[]]
-for t in temp:
-	count = 0
-	#print(t)
-	for filt in [ufilt,bfilt,vfilt]:
-		f = interp1d(lam*1e10,planck(lam,t))
-		indx = np.arange(len(filt[0]))
-		indx = indx[filt[0] > 0]
-
-		bb_match = f(filt[0][indx])
-		bb_match_nu = bb_match * filt[0][indx]**2 / c
-		int_flux = integrated_flux(2.998e18/filt[0][indx],filt[1][indx],bb_match_nu)
-		mags[count].append(-2.5*np.log10(int_flux)+48.6)
-		count += 1
-mags = np.asarray(mags)
 
 # -- ALL TEMPS -- #
 oth_mags = [[],[],[]]
@@ -116,7 +99,8 @@ ax1.plot(k_mags[1]-k_mags[2],k_mags[0]-k_mags[1],color='k',ls=':',zorder=1,alpha
 for i in range(len(models)):
 	ax1.scatter(k_mags[1][i]-k_mags[2][i],k_mags[0][i]-k_mags[1][i],edgecolor='k',\
 		s=100,color=colors[i],label=names[i])
-	#print('%s & %s & %s'%(names[i],round(k_mags[1][i]-k_mags[2][i],3),round(k_mags[0][i]-k_mags[1][i],3))) # Latex table coding
+	#print('%s & %s & %s'%(names[i],round(k_mags[1][i]-k_mags[2][i],3),\
+	#	round(k_mags[0][i]-k_mags[1][i],3))) # Latex table coding
 
 if own == True:
 	ax1.text(0.3,0.9,'Data from personal\n   Kurucz models', transform=ax1.transAxes,fontsize=15)
@@ -143,7 +127,8 @@ for i in range(len(alltemp)):
 	t = alltemp[i]*1e3
 	ax.scatter(oth_mags[1][i]-oth_mags[2][i],oth_mags[0][i]-oth_mags[1][i],edgecolor='k',\
 		s=100,color=colors[i],label='%s K'%round(t))
-	#print('%s & %s & %s'%(t,round(oth_mags[1][i]-oth_mags[2][i],3),round(oth_mags[0][i]-oth_mags[1][i],3))) # Latex table coding
+	#print('%s & %s & %s'%(t,round(oth_mags[1][i]-oth_mags[2][i],3),\
+	#	round(oth_mags[0][i]-oth_mags[1][i],3))) # Latex table coding
 ax.legend(frameon=False,loc=3,fontsize=15)
 
 ax.set_ylim(ylims[0],ylims[1])

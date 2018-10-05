@@ -17,8 +17,11 @@ def planck(x,T,which='lam'):
 	return bT
 
 def wiens(T):
-	return b / T # will be in meters    # just to make it easier to add the text
-                                      # at the peak of each blackbody
+	'''
+	This function is just to make it easier
+	to add the text at the peak of each blackbody
+	'''
+	return b / T # will be in meters    
 # -------------------- #
 
 # --- plotting both versions --- #
